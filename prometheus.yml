@@ -1,0 +1,25 @@
+global:
+  scrape_interval:     10s
+  evaluation_interval: 10s
+
+scrape_configs:
+  - job_name: 'discovery-service'
+    metrics_path: 'actuator/prometheus'
+    static_configs:
+      - targets: ['discovery-service:7000']
+        labels:
+          application: 'Discovery Server Application'
+
+  - job_name: "story-manager-service"
+    metrics_path: 'actuator/prometheus'
+    static_configs:
+      - targets: [ 'story-manager-service:4444' ]
+        labels:
+          application: 'StoryManagerService Application'
+
+  - job_name: "story-progress-service"
+    metrics_path: 'actuator/prometheus'
+    static_configs:
+      - targets: [ 'story-progress-service:5555' ]
+        labels:
+          application: 'StoryProgressiveService Application'
