@@ -15,6 +15,7 @@ public class StorageConfig {
     @Bean
     public Storage storage() throws IOException {
         // Загрузка ключа сервисного аккаунта из файла JSON
+//        FileInputStream credentialsStream = new FileInputStream("/app/credentials.json");
         FileInputStream credentialsStream = new FileInputStream("/app/credentials.json");
         ServiceAccountCredentials credentials = ServiceAccountCredentials.fromStream(credentialsStream);
 
