@@ -16,7 +16,7 @@ public class StorageConfig {
     public Storage storage() throws IOException {
         // Загрузка ключа сервисного аккаунта из файла JSON
 //        FileInputStream credentialsStream = new FileInputStream("/app/credentials.json");
-        FileInputStream credentialsStream = new FileInputStream("/app/credentials.json");
+        FileInputStream credentialsStream = new FileInputStream("/Users/denpool/Desktop/Credentials/credentials.json");
         ServiceAccountCredentials credentials = ServiceAccountCredentials.fromStream(credentialsStream);
 
         // Использование ключа сервисного аккаунта для создания объекта Storage
