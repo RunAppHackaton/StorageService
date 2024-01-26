@@ -10,6 +10,8 @@ import com.runapp.storageservice.dto.response.StorageResponse;
 import com.runapp.storageservice.exception.IoException;
 import com.runapp.storageservice.exception.NoEntityFoundException;
 import com.runapp.storageservice.exception.UncorrectedUriException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +29,14 @@ public class StorageServiceImpl implements StorageService {
 
     @Value("${spring.bucket-name}")
     private String bucketName;
+    private static final Logger LOGGER = LoggerFactory.getLogger(StorageServiceImpl.class);
 
     @Autowired
     private Storage storage;
 
     @Override
     public ResponseEntity<StorageResponse> uploadFile(MultipartFile file, String directory) {
+        LOGGER.info("Upload file to directory: {}", directory);
         try {
             String fileName = directory + UUID.randomUUID();
             BlobId blobId = BlobId.of(bucketName, fileName);
@@ -48,6 +52,7 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public ResponseEntity<DeleteResponse> deleteFile(DeleteRequest deleteRequest) {
+        LOGGER.info("Delete file: {}", deleteRequest);
         try {
             URI uri = new URI(deleteRequest.getFile_uri());
             String path = uri.getPath();
