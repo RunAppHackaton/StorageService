@@ -119,3 +119,11 @@ jobs:
       - name: Deploy to Cloud Run
         id: deploy
         run: ./.github/workflows/gcloud_deploy_to_cloud_run.sh
+
+      - name: Send success deploy message
+        env:
+          CHAT_ID: ${{ vars.CHAT_ID }}
+          BOT_TOKEN: ${{ vars.BOT_TOKEN }}
+          PHOTO_URI: ${{ vars.PHOTO_URI }}
+        run: ./.github/workflows/send_message_to_telegram.sh $CHAT_ID $BOT_TOKEN $PHOTO_URI
+        if: success()
